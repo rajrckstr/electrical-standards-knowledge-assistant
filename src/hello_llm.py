@@ -5,12 +5,11 @@ import os
 load_dotenv()
 
 model_name = os.getenv("MODEL_NAME")
-temperature = float(os.getenv("TEMPERATURE"))
 client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
 
 def hello_llm(user_input: str) -> str:
     response = client.chat.completions.create(
-        model=model_name,
+        model="gpt-4o-mini",
         messages=[
             {
                 "role": "system",
@@ -21,7 +20,7 @@ def hello_llm(user_input: str) -> str:
                 "content": user_input
             }
         ],
-        temperature=temperature
+        temperature=0.2
     )
     return response.choices[0].message.content
 
